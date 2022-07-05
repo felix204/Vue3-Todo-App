@@ -1,3 +1,11 @@
 <template>
-    <small>5 adet todo var</small>
+    <small>{{ itemCount }} adet todo var</small>
 </template>
+
+
+<script>
+export default {
+    props : ["itemCount"]
+}
+
+</script>

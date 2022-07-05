@@ -1,7 +1,7 @@
 <template>
     <li>
         <span>{{ item.text }}</span>
-        <button>Sil</button>
+        <button @click="$emit('delete-todo-item', item)">Sil</button>
     </li>
 </template>
 <script>

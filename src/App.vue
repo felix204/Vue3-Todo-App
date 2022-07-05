@@ -3,9 +3,9 @@
     <div class="container">
       <h1>ToDo App</h1>
       <hr />
-      <AddSection />
-      <TodoInList :myData="todoList"/>
-      <ResultBar />
+      <AddSection @add-todo="addNewTodo"/>
+      <TodoInList @delete-todo-item="deleteItem" :myData="todoList"/>
+      <ResultBar :itemCount="todoList.length"/>
       
     </div>
   </div>
@@ -43,17 +43,15 @@ data(){
   },
   
   methods : {
-    delteItem(todoItem) {
+    deleteItem(todoItem) {
       this.todoList = this.todoList.filter((t) => t != todoItem);
     },
-  addNewTodo(event) {
-     this.todoList.push({
-      id : new Date().getTime(),
-      text : event.target.value
-     });
-      event.target.value = '';
+    addNewTodo(todo) {
+      this.todoList.push({
+        id : new Date().getTime(),
+        text : todo
+      });
     }
   }
-
 };
 </script>
