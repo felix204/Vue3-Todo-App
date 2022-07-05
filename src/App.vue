@@ -1,26 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main-container">
+    <div class="container">
+      <h1>ToDo App</h1>
+      <hr />
+      <label for="todoText"></label>
+      <input @keydown.enter="addNewTodo" type="text" id="todoText" placeholder="bir şeyler yaz.." />
+      <ul>
+        <li v-for="todoItem in todoList" :key="todoItem.id">
+          <span> {{ todoItem.text }} </span> 
+          <button @click="delteItem(todoItem)">Sil</button>
+        </li>
+      </ul>
+      <small> {{ todoList.length }} adet todo var</small>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return {
+      todoList : [
+        {id : 1, text : "bootcamp1"},
+        {id : 2, text : "bootcamp2"},
+        {id : 3, text : "bootcamp3"},
+      ]
+    }
+  },
+  
+  methods : {
+    delteItem(todoItem) {
+      this.todoList = this.todoList.filter((t) => t != todoItem);
+    },
+    addNewTodo(event) {
+       this.todoList.push({
+        id : new Date().getTime(),
+        text : event.target.value
+       });
+    }
   }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+};
+</script>
